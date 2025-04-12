@@ -1,0 +1,71 @@
+# 🌐 sriox.com – Self-Hosted Domain & Web Hosting Platform (Coolify + VPS)
+
+A powerful, self-hosted subdomain and redirect platform like is-a.dev — fully managed from your VPS.  
+Users can upload websites, create redirects, and map GitHub Pages repos under your domain `sriox.com` — all through a sleek dashboard.
+
+---
+
+## 🚀 Features
+
+### 🗂️ 1. Free Static Hosting with Subdomain (like GitHub Pages)
+- Users can upload a ZIP (≤ 35MB) containing `index.html`
+- System extracts and serves the site at:  
+  `yourname.sriox.com`
+- Websites are stored at:  
+  `/data/sites/{subdomain}/`
+
+### 🔁 2. Redirect Pages (sriox.com/username)
+- Users can create subpages like:  
+  `sriox.com/meher` → `https://example.com/meher`
+- A simple HTML file with meta-refresh is generated at:  
+  `/data/subpages/{name}.html`
+
+### 🐙 3. GitHub Pages Domain Mapping (is-a.dev-style)
+- Users can link their GitHub Pages repo (e.g. `username.github.io/repo`)
+- Your system:
+  - Stores the mapping in a JSON file or database
+  - Updates Cloudflare DNS for the subdomain
+  - Creates a CNAME pointing to GitHub Pages
+- Example:  
+  `project.sriox.com` → `username.github.io/project`
+
+### 🧑‍💻 4. Full Dashboard (Built with React)
+- Auth (email, password or Firebase)
+- Upload ZIP file
+- Add/edit/delete subdomains
+- Create redirects
+- Link GitHub Pages repos
+- Show user limit status (free vs upgraded)
+
+---
+
+## 💳 Plans & Limits
+
+| Feature            | Free Plan | Pro Plan |
+|--------------------|-----------|----------|
+| Subdomains         | 2         | Unlimited |
+| Redirects (/page)  | 2         | Unlimited |
+| GitHub Link Maps   | 2         | Unlimited |
+| ZIP Upload Limit   | 35MB      | 35MB     |
+| Custom Branding    | ❌        | ✅        |
+
+> 🛑 Exceeding the free limit will show:  
+> _"You've reached your free hosting limit. Please upgrade to Pro."_
+
+---
+
+## ⚙️ Tech Stack
+you can use your recomended for coolify + vps for my app some of my suggestins are
+| Layer     | Stack                                 |
+|-----------|----------------------------------------|
+| Frontend  | React + TailwindCSS                   |
+| Backend   | Node.js (Express) / Flask             |
+| Auth      | JWT                  |
+| Storage   | VPS file system                       |
+| DNS Mgmt  | Cloudflare DNS API                    |
+| Hosting   | NGINX or Express static middleware    |
+| GitHub Link | is-a.dev-style JSON registration    |
+| Database  | PostgreSQL (Coolify-managed)          |
+
+---
+
