@@ -1,0 +1,50 @@
+{
+  "version": 3,
+  "services": {
+    "frontend": {
+      "buildPack": "docker",
+      "dockerfilePath": "./frontend/Dockerfile",
+      "env": [
+        "REACT_APP_API_URL=${API_URL}"
+      ],
+      "ports": ["80:8080"],
+      "volumes": [
+        "./data/sites:/usr/share/nginx/sites",
+        "./data/subpages:/usr/share/nginx/subpages"
+      ]
+    },
+    "backend": {
+      "buildPack": "docker",
+      "dockerfilePath": "./backend/Dockerfile",
+      "env": [
+        "NODE_ENV=production",
+        "DB_HOST=${DB_HOST}",
+        "DB_PORT=${DB_PORT}",
+        "DB_NAME=${DB_NAME}",
+        "DB_USER=${DB_USER}",
+        "DB_PASSWORD=${DB_PASSWORD}",
+        "JWT_SECRET=${JWT_SECRET}",
+        "CLOUDFLARE_API_KEY=${CLOUDFLARE_API_KEY}",
+        "CLOUDFLARE_EMAIL=${CLOUDFLARE_EMAIL}",
+        "CLOUDFLARE_ZONE_ID=${CLOUDFLARE_ZONE_ID}"
+      ],
+      "ports": ["5000:5000"],
+      "volumes": ["./data:/app/data"]
+    },
+    "postgres": {
+      "buildPack": "docker",
+      "image": "postgres:14-alpine",
+      "env": [
+        "POSTGRES_DB=${DB_NAME}",
+        "POSTGRES_USER=${DB_USER}",
+        "POSTGRES_PASSWORD=${DB_PASSWORD}"
+      ],
+      "ports": ["5432:5432"],
+      "volumes": [
+        "postgres_data:/var/lib/postgresql/data",
+        "./backend/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql"
+      ],
+      "persistent": true
+    }
+  }
+}
